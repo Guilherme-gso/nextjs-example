@@ -7,6 +7,8 @@ type Props = {
   token: string
 }
 
+const api = getApi('loginApi')
+
 export default function Login({ token }: Props): JSX.Element {
   return (
     <div>
@@ -16,7 +18,6 @@ export default function Login({ token }: Props): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const api = getApi('loginApi')
   const { data } = await api.get('/login')
   setCookie(context, 'gsp-user-token', data.token)
   return { props: data }
